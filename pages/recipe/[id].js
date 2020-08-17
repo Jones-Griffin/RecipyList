@@ -3,22 +3,11 @@ import fire from '../../config/fire-config';
 import Link from 'next/link'
 
 const Recipe = (props) => {
-  const [Recipe, setRecipe] = useState(null);  useEffect(() => {
-    fire.database()
-      .ref(`Recipies/${props.id}`).once('value').then(function(snapshot) {
-        const Recipe = (snapshot.val());
-        console.log(Recipe)
-        setRecipe(Recipe);
-      });
-  }, []);  if(!Recipe){
-    return(
-      <h2>Loading...</h2>
-    )
-  }  return (
+   return (
     <div>
-      <h2>{props.id}</h2>
+      <h2>{props.title}</h2>
       <p>
-        {Recipe.Method}
+        {props.content}
       </p>
       <Link href="/">
         <a>Back</a>
@@ -26,9 +15,21 @@ const Recipe = (props) => {
     </div>
   )
 }
-Recipe.getInitialProps = ({ query }) => {
+
+export const getServerSideProps = async ({ query }) => {
+  const content = {}
+  await fire.database()
+  .ref(`Recipies/${query.id}`).once('value').then(function(snapshot) {
+     return (snapshot.val());
+  }).then(result => {
+    content['title'] = query.id;
+    content['content'] = result.Method;
+  });;
   return {
-      id: query.id,
+    props: {
+      title: content.title,
+      content: content.content,
+    }
   }
 }
   export default Recipe
