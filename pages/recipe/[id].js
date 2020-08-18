@@ -10,7 +10,7 @@ const Recipe = (props) => {
       <ul>
       {Object.entries(props.Ingredients).map(ingree =>
         <li key={ingree[0]}>
-          {ingree[0]} {ingree[1]}
+          {ingree[1]}
         </li>
       )}
       </ul>

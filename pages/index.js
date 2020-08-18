@@ -17,7 +17,7 @@ const RecipyCardDiv = styled.div`
   justify-content: space-around;
 `;
 
-const Home = () => {
+const Home = (props) => {
   const [notification, setNotification] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   fire.auth()
@@ -29,14 +29,14 @@ const Home = () => {
       }
     })
 
-  const [Recipe, setRecipe] = useState([]);useEffect(() => {
-    fire.database()
-      .ref('RecipyNames').once('value').then(function(snapshot) {
-        const Recipe = (snapshot.val() && snapshot.val() || 'Anonymous');
+  // const [Recipe, setRecipe] = useState([]);useEffect(() => {
+  //   fire.database()
+  //     .ref('RecipyNames').once('value').then(function(snapshot) {
+  //       const Recipe = (snapshot.val() && snapshot.val() || 'Anonymous');
       
-        setRecipe(Recipe);
-      });
-  }, []);
+  //       setRecipe(Recipe);
+  //     });
+  // }, []);
 
   const handleLogout = () => {
     fire.auth()
@@ -49,7 +49,6 @@ const Home = () => {
       });
   }
 
-  console.log("test", Recipe)
   return (
     <div>
     <Head>
@@ -71,7 +70,7 @@ const Home = () => {
       <button onClick={handleLogout}>Logout</button>
     } 
     <RecipyCardDiv> 
-      {Object.entries(Recipe).map(Recipy =>
+      {Object.entries(props.Recipe).map(Recipy =>
           <Link key={Recipy[1].title} href="/recipe/[id]" as={'/recipe/' + Recipy[0]}>
             <a>
             <RecipyCard title= {Recipy[1].title}/>
@@ -83,5 +82,22 @@ const Home = () => {
     {loggedIn && <CreatePost />}
   </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const content = {}
+  await fire.database()
+  .ref(`RecipyNames`).once('value').then(function(snapshot) {
+     return (snapshot.val());
+  }).then(result => {
+    content['RecipyCards'] = result;
+  });;
+
+  
+  return {
+    props: {
+      Recipe: content.RecipyCards,
+    }
+  }
 }
 export default Home;
