@@ -4,6 +4,7 @@ import fire from '../config/fire-config';
 import Link from 'next/link';
 import styled from 'styled-components'
 
+import Layout from '../components/Layout'
 import CreatePost from '../components/createRecipy';
 import RecipyCard from '../components/RecipyCard';
 
@@ -19,67 +20,29 @@ const RecipyCardDiv = styled.div`
 
 const Home = (props) => {
   const [notification, setNotification] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  fire.auth()
-    .onAuthStateChanged((user) => {
-      if (user) {
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    })
+ 
 
-  // const [Recipe, setRecipe] = useState([]);useEffect(() => {
-  //   fire.database()
-  //     .ref('RecipyNames').once('value').then(function(snapshot) {
-  //       const Recipe = (snapshot.val() && snapshot.val() || 'Anonymous');
-      
-  //       setRecipe(Recipe);
-  //     });
-  // }, []);
 
-  const handleLogout = () => {
-    fire.auth()
-      .signOut()
-      .then(() => {
-        setNotification('Logged out')
-        setTimeout(() => {
-          setNotification('')
-        }, 2000)
-      });
-  }
 
   return (
     <div>
     <Head>
       <title>Recipe App</title>
     </Head>
+    <Layout >
     <h1>Recipies</h1>
     {notification}
-    {!loggedIn 
-    ?
-      <div>
-        <Link href="/login/register">
-          <a>Register</a>
-        </Link> | 
-        <Link href="/login">
-          <a> Login</a>
-        </Link>
-      </div>
-    :
-      <button onClick={handleLogout}>Logout</button>
-    } 
     <RecipyCardDiv> 
       {Object.entries(props.Recipe).map(Recipy =>
           <Link key={Recipy[1].title} href="/recipe/[id]" as={'/recipe/' + Recipy[0]}>
             <a>
-            <RecipyCard title= {Recipy[1].title}/>
+            <RecipyCard title= {Recipy[1].title} desc={Recipy[1].description}/>
             </a>
 
           </Link>
       )}
     </RecipyCardDiv>  
-    {loggedIn && <CreatePost />}
+    </Layout>
   </div>
   )
 }

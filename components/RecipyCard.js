@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 const StyledDiv = styled.div`
     height: 250px;
-    max-width: 350px;
-    width: 33vw;
+    width: 275px;
     border: 2px solid black;
+    margin: 7px;
     border-radius: 25px;
     box-shadow: 3px 3px 5px grey;
     transition: all 0.1s ease-in-out; 
@@ -14,12 +14,38 @@ const StyledDiv = styled.div`
     }
 `;
 
+const TitleDiv = styled.div`
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
+
+`;
+
+const ImgDiv = styled.div`
+    width: 100%;
+    background-color: grey;
+    height: 60%;
+    z-index: 0;
+    font-weight: normal;
+    font-size: 12px;
+    vertical-align: middle;
+    line-height: 150px; 
+`;
+
+const DescDiv = styled.div`
+    font-weight: normal;
+    font-size: 12px;
+
+
+`;
+
 export default function RecipyCard(props){
     return(
     <StyledDiv>
-        <div></div>
-        <div></div>
-        <div>{props.title}</div>
+        <TitleDiv>{props.title}</TitleDiv>
+        <ImgDiv>300x300</ImgDiv>
+        <DescDiv>{props.desc}</DescDiv>
     </StyledDiv>
     )
 }

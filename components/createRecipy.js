@@ -45,7 +45,11 @@ const CreatePost = () => {
       
 
         setTitle('');
-        setDescription('');    
+        setDescription(''); 
+        setIngredients('')  
+        setCountIng(0)
+        setMethod('')
+        setCountMeth(0)
         setNotification('Blogpost created');    
         setTimeout(() => {
             setNotification('')

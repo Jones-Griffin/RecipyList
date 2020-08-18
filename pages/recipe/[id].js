@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import fire from '../../config/fire-config';
 import Link from 'next/link'
 
+import Layout from '../../components/Layout'
+
 const Recipe = (props) => {
-  {console.log(Object.entries(props.Method))}
    return (
-    <div>
+    <Layout>
       <h2>{props.Title}</h2>
       <ul>
       {Object.entries(props.Ingredients).map(ingree =>
@@ -24,7 +25,7 @@ const Recipe = (props) => {
       <Link href="/">
         <a>Back</a>
       </Link>
-    </div>
+    </Layout>
   )
 }
 
@@ -48,4 +49,4 @@ export const getServerSideProps = async ({ query }) => {
     }
   }
 }
-  export default Recipe
+export default Recipe

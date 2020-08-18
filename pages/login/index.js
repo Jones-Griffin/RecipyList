@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import fire from '../../config/fire-config';
 import { useRouter } from 'next/router'
+import Layout from '../../components/Layout'
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ const Login = () => {
     setPassword('')
     router.push("/")  }  
     return (
-    <div>
+    <Layout>
       <h1>Login</h1>
       {notify}
       <form onSubmit={handleLogin}>
@@ -34,7 +35,7 @@ const Login = () => {
         <br />
         <button type="submit">Login</button>
       </form>
-    </div>
+    </Layout>
   )
 }
 export default Login
