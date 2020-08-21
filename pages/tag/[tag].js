@@ -4,35 +4,8 @@ import styled from 'styled-components'
 
 import Layout from '../../components/Layout'
 import RecipyCard from '../../components/RecipyCard';
+import RecipyCardDiv from '../../components/RecipyCardStyling'
 
-
-const RecipyCardDiv = styled.div`
-  margin: 15px 20px;
-  display: grid;
-  max-height: 1320px;
-  min-height: 60vh;
-
-  grid-template-columns: auto;
-  overflow: hidden;
-
-  @media(min-width: 630px){
-    grid-template-columns: repeat(2, 1fr);
-    max-height: 1056px;
-  }
-  @media(min-width: 950px){
-    grid-template-columns: repeat(3, 1fr);
-    max-height: 792px;
-  }
-  @media(min-width: 1250px){
-    grid-template-columns: repeat(4, 1fr);
-  }
-  // display: flex;
-  // flex-wrap: wrap;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  justify-content: space-around;
-`;
 
 export default function NavButtons(props){
 
@@ -65,9 +38,8 @@ export const getServerSideProps = async ({ query }) => {
     .ref(`TagInfo/${query.tag}`).once('value').then(function(snapshot) {
        return (snapshot.val());
     }).then(result => {
-        content = result
-  
-    });;
+        content = result  
+    });
     
     return {
       props: {
