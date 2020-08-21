@@ -38,7 +38,7 @@ const Home = (props) => {
 export const getServerSideProps = async () => {
   const content = {}
   await fire.database()
-  .ref(`RecipyNames`).once('value').then(function(snapshot) {
+  .ref(`RecipyNames`).limitToLast(15).once('value').then(function(snapshot) {
      return (snapshot.val());
   }).then(result => {
     content['RecipyCards'] = result;
