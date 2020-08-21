@@ -25,7 +25,7 @@ const ListItem = styled.li`
 `;
 
 const HiddenItem = styled(ListItem)`
-      @media(max-width: 1045px){
+      @media(max-width: 1085px){
         display: none;
       }
 `;
@@ -33,7 +33,7 @@ const HiddenItem = styled(ListItem)`
 
 
 const DropDown = styled(ListItem)`
-      @media(min-width: 1045px){
+      @media(min-width: 1085px){
         display: none;
       }
 

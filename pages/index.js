@@ -31,7 +31,7 @@ const RecipyCardDiv = styled.div`
   font-size: 30px;
   font-weight: bold;
   text-align: center;
-  justify-content: space-around;
+  justify-items: center;
 `;
 
 const Home = (props) => {
