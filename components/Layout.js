@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import fire from '../config/fire-config';
 import Link from 'next/link';
 
+import NavButtons from './tagbuttons'
+
 const Header = styled.div`
     width: 100%;
     height: 57px;
@@ -20,6 +22,9 @@ const Title = styled.h1`
     color: #FFFFFF;
     line-height: 57px;
     margin: 0;
+    &:hover{
+      cursor: pointer;
+    }
 `;
 
 export default function Layout(props){
@@ -42,15 +47,11 @@ export default function Layout(props){
     return(
         <div>
             <Header>
-                <Title>How To Cook</Title>
+                <Link href="/">
+                  <Title>How To Cook</Title>
+                </Link>
 
-                {loggedIn &&
-                                <Link href="/recipe/new-recipe">
-                                <a>Add New Recipe</a>
-                                </Link>
-                
-                }
-
+                <NavButtons/>
                 {!loggedIn 
                 ?
                 <div>
@@ -62,7 +63,12 @@ export default function Layout(props){
                     </Link>
                 </div>
                 :
+                <div>
+                <Link href="/recipe/new-recipe">
+                <a>Add New Recipe</a>
+                </Link>
                 <button onClick={handleLogout}>Logout</button>
+                </div>
                 } 
             </Header>
             {props.children}

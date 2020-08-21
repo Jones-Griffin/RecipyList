@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import fire from '../../config/fire-config';
 
 
-const NewRecipy = () => {
+const NewRecipy = (props) => {
     const [loggedIn, setLoggedIn] = useState(false);
     fire.auth()
     .onAuthStateChanged((user) => {
@@ -31,7 +31,7 @@ const NewRecipy = () => {
 
             :
             <div>
-            <CreatePost/>
+            <CreatePost Tags={props.Tags}/>
 
             <Link href="/">
             <a>Back</a>
@@ -47,5 +47,20 @@ const NewRecipy = () => {
 
 }
 
+export const getServerSideProps = async () => {
+    const content = {}
+    await fire.database()
+    .ref(`Tags`).once('value').then(function(snapshot) {
+       return (snapshot.val());
+    }).then(result => {
+      content['Tags'] = result;
+    });
+    
+    return {
+      props: {
+        Tags: content.Tags,
+      }
+    }
+  }
 
 export default NewRecipy

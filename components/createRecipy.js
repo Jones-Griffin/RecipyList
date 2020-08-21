@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import fire from '../config/fire-config';
+import { useRouter } from 'next/router'
 
 
 
-const CreatePost = () => {
+const CreatePost = (props) => {
+    const router = useRouter();  
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [ingredientsList, setIngredients] = useState([]);
@@ -15,6 +17,14 @@ const CreatePost = () => {
     let Method = [];
     const [countMeth, setCountMeth] = useState(0);
     const [notification, setNotification] = useState('');
+
+    let tagTracker = [];
+    Object.entries(props.Tags).map(Tag =>{
+      const tagData = { tagName: Tag[0], tagSet: false}
+      console.log(Tag)
+      tagTracker.push(tagData)}
+    )
+
 
 
     const handleSubmit = (event) => {
@@ -26,17 +36,25 @@ const CreatePost = () => {
         title: title,
       };
 
+      var filteredMeth = MethodList.filter(Boolean);
+      var filteredIng = ingredientsList.filter(Boolean);
+
       var RecipyData = {
         title: title,
-        Method: MethodList,
-        Ingredients: ingredientsList,
-        
+        Method: filteredMeth,
+        Ingredients: filteredIng,
       };
+
+      
     
       var newRespityKey = fire.database().ref().child('RecipyNames').push().key;
 
       var updates = {};
-
+      tagTracker.forEach(tag => {
+        if(tag.tagSet){
+          updates['/TagInfo/' + tag.tagName + '/' + newRespityKey] = CardData;
+        }
+      });
       updates['/RecipyNames/' + newRespityKey] = CardData;
       updates['/Recipies/' + newRespityKey] = RecipyData;
 
@@ -54,6 +72,8 @@ const CreatePost = () => {
         setTimeout(() => {
             setNotification('')
         }, 2000)
+        router.push("/") 
+        
     }  
 
     const renderIng = (value = null, name = 0) => {
@@ -80,6 +100,25 @@ const CreatePost = () => {
         )
       }
       return uiItems;
+    }
+
+
+    const renderTag = () => {
+      const len = tagTracker.length
+      let tagList = [];
+      for(let i = 0; i< len; i++){
+        tagList.push(
+          <div>
+          <input
+                name={tagTracker[i].tagName} 
+                lable
+                type="checkbox"
+                onChange={() => {tagTracker[i].tagSet = !tagTracker[i].tagSet}} />
+                <p >{tagTracker[i].tagName} </p>
+          </div>
+        )
+      }
+      return tagList;
     }
 
     const renderMeth = (value = null, name = 0) => {
@@ -135,11 +174,17 @@ const CreatePost = () => {
               {renderMeth()}
             </ol>
           </div>
+
+          <div>
+            {renderTag()}
+          </div>
           <button type="submit">Save</button>
         </form>
       </div>
     )
   }
+
+
 
 
   export default CreatePost;

@@ -1,17 +1,33 @@
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import fire from '../config/fire-config';
 import Link from 'next/link';
 import styled from 'styled-components'
 
 import Layout from '../components/Layout'
-import CreatePost from '../components/createRecipy';
 import RecipyCard from '../components/RecipyCard';
 
 const RecipyCardDiv = styled.div`
   margin: 15px 20px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  max-height: 1320px;
+  min-height: 60vh;
+
+  grid-template-columns: auto;
+  overflow: hidden;
+
+  @media(min-width: 630px){
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 1056px;
+  }
+  @media(min-width: 950px){
+    grid-template-columns: repeat(3, 1fr);
+    max-height: 792px;
+  }
+  @media(min-width: 1250px){
+    grid-template-columns: repeat(4, 1fr);
+  }
+  // display: flex;
+  // flex-wrap: wrap;
   font-size: 30px;
   font-weight: bold;
   text-align: center;
@@ -19,8 +35,6 @@ const RecipyCardDiv = styled.div`
 `;
 
 const Home = (props) => {
-  const [notification, setNotification] = useState('');
- 
 
 
 
@@ -31,7 +45,6 @@ const Home = (props) => {
     </Head>
     <Layout >
     <h1>Recipies</h1>
-    {notification}
     <RecipyCardDiv> 
       {Object.entries(props.Recipe).map(Recipy =>
           <Link key={Recipy[1].title} href="/recipe/[id]" as={'/recipe/' + Recipy[0]}>
