@@ -16,13 +16,51 @@ const List = styled.ul`
 
 const ListItem = styled.li`
     float: left;
-    border-right:1px solid #bbb;
+    border-left:1px solid #bbb;
     min-width: 75px;
 
-    &:last-child {
-        border-right: none;
+    &:first-child {
+        border-left: none;
       }
 
+`;
+
+const HiddenItem = styled(ListItem)`
+      @media(max-width: 1045px){
+        display: none;
+      }
+`;
+
+
+
+const DropDown = styled(ListItem)`
+      @media(min-width: 1045px){
+        display: none;
+      }
+
+      .DropdownContent{
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    
+      }
+
+      .DropdownContent a{
+        color: black;
+        padding: 0 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+      }
+
+      .DropdownContent a:hover {background-color: #e5e5e5;}
+
+      &:hover .DropdownContent {
+        display: block;
+      }
 `;
 
 const Tag = styled.a`
@@ -39,6 +77,7 @@ const Tag = styled.a`
 `;
 
 
+
 export default function NavButtons(){
 
     return(
@@ -48,26 +87,26 @@ export default function NavButtons(){
                     <Tag >Dinners</Tag>
                 </Link>
             </ListItem>
-            <ListItem>
+            <HiddenItem>
                 <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
                     <Tag >Chicken</Tag>
                 </Link>
-            </ListItem>
-            <ListItem>
+            </HiddenItem>
+            <HiddenItem>
                 <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
                     <Tag >Beef</Tag>
                 </Link>
-            </ListItem>
-            <ListItem>
+            </HiddenItem>
+            <HiddenItem>
                 <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
                     <Tag >Fish</Tag>
                 </Link>
-            </ListItem>
-            <ListItem>
+            </HiddenItem>
+            <HiddenItem>
                 <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
                     <Tag >Lamb</Tag>
                 </Link>
-            </ListItem>
+            </HiddenItem>
             <ListItem>
                 <Link href="/tag/[tag]" as={'/tag/' + "Pasta"}>
                     <Tag >Pasta</Tag>
@@ -78,6 +117,23 @@ export default function NavButtons(){
                     <Tag >Slow Cooker</Tag>
                 </Link>
             </ListItem>
+            <DropDown>
+                <Tag>Dropdown</Tag>
+                <div className="DropdownContent">
+                    <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
+                        <Tag >Chicken</Tag>
+                    </Link>
+                    <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
+                        <Tag >Beef</Tag>
+                    </Link>
+                    <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
+                        <Tag >Fish</Tag>
+                    </Link>
+                    <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
+                        <Tag >Lamb</Tag>
+                    </Link>
+                </div>
+            </DropDown>
         </List>
     )
 }
