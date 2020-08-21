@@ -13,6 +13,7 @@ const Header = styled.div`
     justify-content: space-between;
     color: #FFFFFF;
     line-height: 57px;
+    padding-left: 7px;
 `;
 
 const Title = styled.h1`
@@ -27,6 +28,49 @@ const Title = styled.h1`
     }
 `;
 
+
+
+const Tag = styled.a`
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0 16px;
+  text-decoration: none;
+  float: left;
+  background-color: #333;
+  min-width: 85px;
+
+  &:hover:not(.active){
+      background-color: #191716;
+      cursor: pointer;
+    }
+`;
+
+const TagLeft = styled(Tag)`
+  border-right:1px solid #bbb;
+`;
+
+const TagButton = styled.button`
+  display: block;
+  color: white;
+  text-align: center;
+  background-color: #333;
+  float: left;
+  padding: 0 16px;
+  text-decoration: none;
+  min-width: 75px;
+  height: 100%;
+  border: none;
+  font-family: inherit;
+  font-size: 100%;
+
+  &:hover:not(.active){
+      background-color: #191716;
+      cursor: pointer;
+    }
+`;
+
+
 export default function Layout(props){
     const [loggedIn, setLoggedIn] = useState(false);
     fire.auth()
@@ -37,11 +81,12 @@ export default function Layout(props){
         setLoggedIn(false)
       }
     })
-    
-  const handleLogout = () => {
-    fire.auth()
-      .signOut()
-  }
+
+    const handleLogout = () => {
+      fire.auth()
+        .signOut()
+    }
+  
 
 
     return(
@@ -56,18 +101,18 @@ export default function Layout(props){
                 ?
                 <div>
                     <Link href="/login/register">
-                    <a>Register</a>
-                    </Link> | 
+                    <TagLeft>Register</TagLeft>
+                    </Link>
                     <Link href="/login">
-                    <a> Login</a>
+                    <Tag> Login</Tag>
                     </Link>
                 </div>
                 :
                 <div>
-                <Link href="/recipe/new-recipe">
-                <a>Add New Recipe</a>
-                </Link>
-                <button onClick={handleLogout}>Logout</button>
+                  <Link  href="/recipe/new-recipe">
+                    <TagLeft >Add New Recipe</TagLeft>
+                  </Link>
+                  <TagButton onClick={handleLogout}>Logout</TagButton>
                 </div>
                 } 
             </Header>

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import fire from '../config/fire-config';
 import Link from 'next/link';
 
 const List = styled.ul`
