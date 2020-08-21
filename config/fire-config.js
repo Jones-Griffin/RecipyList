@@ -5,7 +5,7 @@ import firebase from 'firebase';
 const firebaseConfig = {
     apiKey: 'process.env.apiKey',
     authDomain: 'process.env.authDomain',
-    databaseURL: 'process.env.databaseURL',
+    databaseURL: "https://griffins-foodplanner.firebaseio.com",
     projectId: "griffins-foodplanner",
     storageBucket: "griffins-foodplanner.appspot.com",
     messagingSenderId: "226396313446",
