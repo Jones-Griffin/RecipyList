@@ -3,8 +3,8 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
+    apiKey: 'process.env.apiKey',
+    authDomain: 'process.env.authDomain',
     databaseURL: "https://griffins-foodplanner.firebaseio.com",
     projectId: "griffins-foodplanner",
     storageBucket: "griffins-foodplanner.appspot.com",
