@@ -3,13 +3,13 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: 'process.env.apiKey',
-    authDomain: 'process.env.authDomain',
+    apiKey: 'AIzaSyAbO3IJA2oQ35Wc5YRDmJMcPUW1FkUZzyc',
+    authDomain: 'griffins-foodplanner.firebaseapp.com',
     databaseURL: "https://griffins-foodplanner.firebaseio.com",
     projectId: "griffins-foodplanner",
     storageBucket: "griffins-foodplanner.appspot.com",
-    messagingSenderId: 'process.env.messagingSenderId',
-    appId: 'process.env.appId'
+    messagingSenderId: '226396313446',
+    appId: '1:226396313446:web:d92b57f97245f3b165daa7'
   };
 
 
