@@ -7,10 +7,12 @@ const StyledDiv = styled.div`
     margin: 7px;
     border-radius: 25px;
     box-shadow: 3px 3px 5px grey;
+    z-index: 0;
     transition: all 0.1s ease-in-out; 
     &:hover{
         transform: scale(1.05);
         box-shadow: 10px 10px 5px grey;
+        z-index: 0;
     }
 `;
 

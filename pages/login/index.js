@@ -3,6 +3,14 @@ import { useState } from 'react';
 import fire from '../../config/fire-config';
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
+import styled from 'styled-components'
+
+const Title = styled.h1`
+@media(max-width: 875px){
+  margin-top: 57px;
+}
+`;
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +32,7 @@ const Login = () => {
     router.push("/")  }  
     return (
     <Layout>
-      <h1>Login</h1>
+      <Title>Login</Title>
       {notify}
       <form onSubmit={handleLogin}>
         Email<input type="text" value={username} 

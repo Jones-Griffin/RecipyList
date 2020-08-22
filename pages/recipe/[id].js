@@ -2,12 +2,21 @@ import { useEffect, useState } from 'react';
 import fire from '../../config/fire-config';
 import Link from 'next/link'
 
+import styled from 'styled-components'
+
 import Layout from '../../components/Layout'
+
+const StyledTitle = styled.h1`
+@media(max-width: 875px){
+  margin-top: 57px;
+}
+`;
 
 const Recipe = (props) => {
    return (
     <Layout>
-      <h2>{props.Title}</h2>
+      <StyledTitle>{props.Title}</StyledTitle>
+      <h3>Ingredients</h3>
       <ul>
       {Object.entries(props.Ingredients).map(ingree =>
         <li key={ingree[0]}>
@@ -15,6 +24,7 @@ const Recipe = (props) => {
         </li>
       )}
       </ul>
+      <h3>Method</h3>
       <ol>
       {Object.entries(props.Method).map(Method =>
           <li key={Method[0]}>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import fire from '../config/fire-config';
 import Link from 'next/link';
 import Hamburger from './hamburgr'
+import Container from './atoms/container'
 
 import NavButtons from './tagbuttons'
 
@@ -76,6 +77,9 @@ const TagButton = styled.button`
     }
 `;
 const Mobile = styled.div`
+  position: fixed;
+  width: 100vw;
+  top:0;
     @media(min-width: 875px){
       display: none;
     }
@@ -141,7 +145,9 @@ export default function Layout(props){
                     } 
                   </Header>
                 </Desktop>
+            <Container>
             {props.children}
+            </Container>
         </div>
     )
 }

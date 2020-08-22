@@ -3,6 +3,15 @@ import { useState } from 'react';
 import fire from '../../config/fire-config';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout'
+import styled from 'styled-components'
+
+const Title = styled.h1`
+@media(max-width: 875px){
+  margin-top: 57px;
+}
+`;
+
+
 const Register = () => {  
     
     const router = useRouter();  
@@ -36,7 +45,7 @@ const Register = () => {
     }  
     return (
     <Layout>
-      <h1>Create new user</h1>        
+      <Title>Create new user</Title>        
       
       {notification}
 

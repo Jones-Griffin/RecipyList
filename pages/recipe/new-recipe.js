@@ -7,7 +7,11 @@ import CreatePost from '../../components/createRecipy';
 import { useState, useEffect } from 'react';
 import fire from '../../config/fire-config';
 
-
+const MainDiv = styled.div`
+@media(max-width: 875px){
+  margin-top: 57px;
+}
+`;
 const NewRecipy = (props) => {
     const [loggedIn, setLoggedIn] = useState(false);
     fire.auth()
@@ -22,21 +26,21 @@ const NewRecipy = (props) => {
     return (
         <Layout>
         {!loggedIn?
-            <div>
+            <MainDiv>
                 <p>you must be loggin in to perform this function</p>
                 <Link href="/">
                 <a>Back</a>
                 </Link>
-            </div>
+            </MainDiv>
 
             :
-            <div>
+            <MainDiv>
             <CreatePost Tags={props.Tags}/>
 
             <Link href="/">
             <a>Back</a>
             </Link>
-            </div>
+            </MainDiv>
 
         }
 

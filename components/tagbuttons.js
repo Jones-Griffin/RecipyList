@@ -35,6 +35,7 @@ const DropDown = styled(ListItem)`
       @media(min-width: 1085px){
         display: none;
       }
+      min-width: 120px;
 
       .DropdownContent{
         display: none;

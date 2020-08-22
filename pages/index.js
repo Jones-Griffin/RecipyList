@@ -5,9 +5,13 @@ import styled from 'styled-components'
 
 import Layout from '../components/Layout'
 import RecipyCard from '../components/RecipyCard';
-
 import RecipyCardDiv from '../components/RecipyCardStyling'
 
+const Title = styled.h1`
+@media(max-width: 875px){
+  margin-top: 57px;
+}
+`;
 
 const Home = (props) => {
 
@@ -19,7 +23,7 @@ const Home = (props) => {
       <title>Recipe App</title>
     </Head>
     <Layout >
-    <h1>Recipies</h1>
+    <Title>Recipies</Title>
     <RecipyCardDiv> 
       {Object.entries(props.Recipe).map(Recipy =>
           <Link key={Recipy[1].title} href="/recipe/[id]" as={'/recipe/' + Recipy[0]}>
