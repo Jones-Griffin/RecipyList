@@ -5,7 +5,6 @@ const List = styled.ul`
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #333;
     line-height: 57px;
     text-align: center;
@@ -74,6 +73,70 @@ const Tag = styled.a`
         cursor: pointer;
       }
 `;
+
+
+const LisMob = styled(List)`
+      display: flex;
+      flex-direction: column;
+      height: auto;
+
+`;
+
+const ListItemMob = styled(ListItem)`
+      width: 100%;
+      
+      border-left: none;
+      border-top:1px solid #bbb;
+      min-width: 75px;
+  
+      &:first-child {
+          border-top: none;
+        }
+      
+`;
+
+
+export function NavMobile(){
+    return(
+        <LisMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Dinners"}>
+                    <Tag >Dinners</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
+                    <Tag >Chicken</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
+                    <Tag >Beef</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
+                    <Tag >Fish</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
+                    <Tag >Lamb</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "Pasta"}>
+                    <Tag >Pasta</Tag>
+                </Link>
+            </ListItemMob>
+            <ListItemMob>
+                <Link href="/tag/[tag]" as={'/tag/' + "SlowCooker"}>
+                    <Tag >Slow Cooker</Tag>
+                </Link>
+            </ListItemMob>
+        </LisMob>
+    )
+}
 
 
 
