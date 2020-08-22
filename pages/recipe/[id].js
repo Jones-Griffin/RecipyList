@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import styled from 'styled-components'
 
-import Layout from '../../components/Layout'
+import Layout from '../../components/molecules/Layout'
 
 const StyledTitle = styled.h1`
 @media(max-width: 875px){

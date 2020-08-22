@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 import { useState, useEffect } from 'react';
-import fire from '../config/fire-config';
+import fire from '../../config/fire-config';
 import Link from 'next/link';
-import Hamburger from './hamburgr'
-import Container from './atoms/container'
+import Hamburger from '../atoms/hamburgr'
+import Container from '../atoms/container'
 
-import NavButtons from './tagbuttons'
+import NavButtons from '../atoms/tagbuttons'
 
 const Header = styled.div`
     width: 100%;

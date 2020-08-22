@@ -2,7 +2,7 @@
 import { useState } from 'react'; 
 import fire from '../../config/fire-config';
 import { useRouter } from 'next/router';
-import Layout from '../../components/Layout'
+import Layout from '../../components/molecules/Layout'
 import styled from 'styled-components'
 
 const Title = styled.h1`

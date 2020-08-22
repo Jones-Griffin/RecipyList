@@ -1,10 +1,69 @@
 // components/CreatePost.js
 
 import React, { useState } from 'react';
-import fire from '../config/fire-config';
+import fire from '../../config/fire-config';
 import { useRouter } from 'next/router'
 
+import styled from 'styled-components'
 
+const DefForm = styled.input`
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+`;
+
+const FormTitle = styled(DefForm)`
+  font-weight: bold;
+  font-size: 30px;
+  background-color: #f8f8f8;
+  max-width: 406px;
+  width: 100%;
+`;
+
+const FormDesc = styled.textarea`
+  height: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: #f8f8f8;
+  resize: none;
+  max-width: 406px;
+  width: 100%;
+`;
+
+const FormIM = styled.textarea`
+  padding: 8px 10px;
+  padding-bottom: 0;
+  // margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: #f8f8f8;
+  resize: none;
+  max-width: 366px;
+  width: 100%;
+  line-height: 15px;
+`;
+
+const ListIM = styled.li`
+  margin: 12px 0;
+`;
+
+const CheckDiv = styled.div`
+  display: flex;
+  margin: 0 12px;
+`;
+
+const TagDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 420px;
+  width: 100%;
+`;
 
 const CreatePost = (props) => {
     const router = useRouter();  
@@ -90,12 +149,12 @@ const CreatePost = (props) => {
       }
       for(let i=0; i!=(countIng+1); i++){
         uiItems.push(
-          <li key={i}>
-            <textarea 
+          <ListIM key={i}>
+            <FormIM 
                 name = {i}
                 value={ingredients[{i}]} 
                 onChange={({target}) => renderIng(target.value, target.name)} />
-          </li>
+          </ListIM>
                 
         )
       }
@@ -108,14 +167,14 @@ const CreatePost = (props) => {
       let tagList = [];
       for(let i = 0; i< len; i++){
         tagList.push(
-          <div>
+          <CheckDiv>
           <input
                 name={tagTracker[i].tagName} 
                 lable
                 type="checkbox"
                 onChange={() => {tagTracker[i].tagSet = !tagTracker[i].tagSet}} />
                 <p >{tagTracker[i].tagName} </p>
-          </div>
+          </CheckDiv>
         )
       }
       return tagList;
@@ -135,12 +194,12 @@ const CreatePost = (props) => {
       }
       for(let i=0; i!=(countMeth+1); i++){
         uiMethod.push(
-          <li key={i}>
-            <textarea 
+          <ListIM key={i}>
+            <FormIM 
                 name = {i}
                 value={Method[{i}]} 
                 onChange={({target}) => renderMeth(target.value, target.name)} />
-          </li>
+          </ListIM>
                 
         )
       }
@@ -154,12 +213,12 @@ const CreatePost = (props) => {
         <form onSubmit={handleSubmit}>
           <div>
             Title<br />
-            <input type="text" value={title} 
+            <FormTitle type="text" value={title} 
              onChange={({target}) => setTitle(target.value)} />
           </div>
           <div>
             Description<br />
-            <textarea value={description} 
+            <FormDesc value={description} 
              onChange={({target}) => setDescription(target.value)} />
           </div>
           <div>
@@ -175,9 +234,9 @@ const CreatePost = (props) => {
             </ol>
           </div>
 
-          <div>
+          <TagDiv>
             {renderTag()}
-          </div>
+          </TagDiv>
           <button type="submit">Save</button>
         </form>
       </div>

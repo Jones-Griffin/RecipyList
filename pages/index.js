@@ -3,9 +3,9 @@ import fire from '../config/fire-config';
 import Link from 'next/link';
 import styled from 'styled-components'
 
-import Layout from '../components/Layout'
-import RecipyCard from '../components/RecipyCard';
-import RecipyCardDiv from '../components/RecipyCardStyling'
+import Layout from '../components/molecules/Layout'
+import RecipyCard from '../components/molecules/RecipyCard';
+import RecipyCardDiv from '../components/molecules/RecipyCardStyling'
 
 const Title = styled.h1`
 @media(max-width: 875px){

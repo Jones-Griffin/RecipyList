@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import styled from 'styled-components'
 
-import Layout from '../../components/Layout'
-import CreatePost from '../../components/createRecipy';
+import Layout from '../../components/molecules/Layout'
+import CreatePost from '../../components/molecules/createRecipy';
 import { useState, useEffect } from 'react';
 import fire from '../../config/fire-config';
 
