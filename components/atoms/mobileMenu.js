@@ -11,7 +11,7 @@ top: 0;
 right: 0;
 height: 500px;
 margin-top: 57px;
-z-index: 8;
+z-index: 99;
 transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
 transition: transform 0.3s ease-in-out;
 @media(min-width: 875px){

@@ -77,6 +77,8 @@ const CreatePost = (props) => {
     const [countMeth, setCountMeth] = useState(0);
     const [notification, setNotification] = useState('');
 
+    const user = fire.auth().currentUser;
+
     let tagTracker = [];
     Object.entries(props.Tags).map(Tag =>{
       const tagData = { tagName: Tag[0], tagSet: false}
@@ -102,6 +104,7 @@ const CreatePost = (props) => {
         title: title,
         Method: filteredMeth,
         Ingredients: filteredIng,
+        user: user.uid,
       };
 
       
@@ -212,7 +215,7 @@ const CreatePost = (props) => {
             {notification}      
         <form onSubmit={handleSubmit}>
           <div>
-            Title<br />
+            Title:<br />
             <FormTitle type="text" value={title} 
              onChange={({target}) => setTitle(target.value)} />
           </div>
@@ -222,13 +225,13 @@ const CreatePost = (props) => {
              onChange={({target}) => setDescription(target.value)} />
           </div>
           <div>
-            Ingredients<br />
+            Ingredients:<br />
             <ol>
               {renderIng()}
             </ol>
           </div>
           <div>
-            Method<br />
+            Method:<br />
             <ol>
               {renderMeth()}
             </ol>

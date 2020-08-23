@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const RecipyCardDiv = styled.div`
   margin: 15px 20px;
+  margin-right: 0;
   display: grid;
   max-height: 1320px;
   min-height: 60vh;
@@ -11,7 +12,7 @@ const RecipyCardDiv = styled.div`
   grid-template-columns: auto;
   overflow: hidden;
 
-  @media(min-width: 630px){
+  @media(min-width: 675px){
     grid-template-columns: repeat(2, 1fr);
     max-height: 1056px;
   }
