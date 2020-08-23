@@ -211,7 +211,7 @@ const CreatePost = (props) => {
 
     return (
       <div>
-        <h2>Add Recipy</h2>      
+        <h2>Add Recipe</h2>      
             {notification}      
         <form onSubmit={handleSubmit}>
           <div>
