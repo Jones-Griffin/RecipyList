@@ -121,8 +121,8 @@ export function NavMobile(){
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
-                    <Tag >Lamb</Tag>
+                <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
+                    <Tag >Pork</Tag>
                 </Link>
             </ListItemMob>
             <ListItemMob>
@@ -166,8 +166,8 @@ export default function NavButtons(){
                 </Link>
             </HiddenItem>
             <HiddenItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
-                    <Tag >Lamb</Tag>
+                <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
+                    <Tag >Pork</Tag>
                 </Link>
             </HiddenItem>
             <ListItem>
@@ -192,8 +192,8 @@ export default function NavButtons(){
                     <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
                         <Tag >Fish</Tag>
                     </Link>
-                    <Link href="/tag/[tag]" as={'/tag/' + "Lamb"}>
-                        <Tag >Lamb</Tag>
+                    <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
+                        <Tag >Pork</Tag>
                     </Link>
                 </div>
             </DropDown>
