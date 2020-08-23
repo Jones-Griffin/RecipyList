@@ -131,7 +131,7 @@ export function NavMobile(){
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "SlowCooker"}>
+                <Link href="/tag/[tag]" as={'/tag/' + "Slow-Cooker"}>
                     <Tag >Slow Cooker</Tag>
                 </Link>
             </ListItemMob>
@@ -176,7 +176,7 @@ export default function NavButtons(){
                 </Link>
             </ListItem>
             <ListItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "SlowCooker"}>
+                <Link href="/tag/[tag]" as={'/tag/' + "Slow-Cooker"}>
                     <Tag >Slow Cooker</Tag>
                 </Link>
             </ListItem>
