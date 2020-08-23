@@ -6,6 +6,7 @@ import Layout from '../../components/molecules/Layout'
 import CreatePost from '../../components/molecules/createRecipy';
 import { useState, useEffect } from 'react';
 import fire from '../../config/fire-config';
+import Head from 'next/head';
 
 const MainDiv = styled.div`
 @media(max-width: 875px){
@@ -25,6 +26,9 @@ const NewRecipy = (props) => {
 
     return (
         <Layout>
+          <Head>
+            <title>New Recipe</title>
+          </Head>
         {!loggedIn?
             <MainDiv>
                 <p>you must be loggin in to perform this function</p>

@@ -1,6 +1,7 @@
 import fire from '../../config/fire-config';
 import Link from 'next/link'
 import styled from 'styled-components'
+import Head from 'next/head';
 
 import Layout from '../../components/molecules/Layout'
 import RecipyCard from '../../components/molecules/RecipyCard';
@@ -15,6 +16,10 @@ const Title = styled.h1`
 export default function NavButtons(props){
 
     return(
+      <div>
+        <Head>
+          <title>{props.tagName}</title>
+        </Head>
         <Layout>
           <Title>{props.tagName}</Title>
             <RecipyCardDiv> 
@@ -27,6 +32,7 @@ export default function NavButtons(props){
                 )}
             </RecipyCardDiv> 
         </Layout>
+      </div>
 
     )
 

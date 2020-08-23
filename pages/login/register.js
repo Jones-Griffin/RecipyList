@@ -4,6 +4,7 @@ import fire from '../../config/fire-config';
 import { useRouter } from 'next/router';
 import Layout from '../../components/molecules/Layout'
 import styled from 'styled-components'
+import Head from 'next/head';
 
 const Title = styled.h1`
 @media(max-width: 875px){
@@ -45,6 +46,9 @@ const Register = () => {
     }  
     return (
     <Layout>
+            <Head>
+              <title>Register</title>
+          </Head>
       <Title>Create new user</Title>        
       
       {notification}

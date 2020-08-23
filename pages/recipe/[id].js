@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import fire from '../../config/fire-config';
 import Link from 'next/link'
+import Head from 'next/head';
 
 import styled from 'styled-components'
 
@@ -15,6 +16,9 @@ const StyledTitle = styled.h1`
 const Recipe = (props) => {
    return (
     <Layout>
+            <Head>
+              <title>{props.Title}</title>
+          </Head>
       <StyledTitle>{props.Title}</StyledTitle>
       <h3>Ingredients</h3>
       <ul>
