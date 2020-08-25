@@ -62,7 +62,7 @@ const DropDown = styled(ListItem)`
       }
 `;
 
-const Tag = styled.a`
+const Tags = styled.a`
     display: block;
     color: white;
     text-align: center;
@@ -101,38 +101,38 @@ export function NavMobile(){
     return(
         <LisMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Dinners"}>
-                    <Tag >Dinners</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Dinners"}>
+                    <Tags >Dinners</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
-                    <Tag >Chicken</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Chicken"}>
+                    <Tags >Chicken</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
-                    <Tag >Beef</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Beef"}>
+                    <Tags >Beef</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
-                    <Tag >Fish</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Fish"}>
+                    <Tags >Fish</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
-                    <Tag >Pork</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Pork"}>
+                    <Tags >Pork</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Pasta"}>
-                    <Tag >Pasta</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Pasta"}>
+                    <Tags >Pasta</Tags>
                 </Link>
             </ListItemMob>
             <ListItemMob>
-                <Link href="/tag/[tag]" as={'/tag/' + "Slow-Cooker"}>
-                    <Tag >Slow Cooker</Tag>
+                <Link href="/tags/" as={'/tags/'}>
+                    <Tags >More...</Tags>
                 </Link>
             </ListItemMob>
         </LisMob>
@@ -146,54 +146,54 @@ export default function NavButtons(){
     return(
         <List>
             <ListItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Dinners"}>
-                    <Tag >Dinners</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Dinners"}>
+                    <Tags >Dinners</Tags>
                 </Link>
             </ListItem>
             <HiddenItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
-                    <Tag >Chicken</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Chicken"}>
+                    <Tags >Chicken</Tags>
                 </Link>
             </HiddenItem>
             <HiddenItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
-                    <Tag >Beef</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Beef"}>
+                    <Tags >Beef</Tags>
                 </Link>
             </HiddenItem>
             <HiddenItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
-                    <Tag >Fish</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Fish"}>
+                    <Tags >Fish</Tags>
                 </Link>
             </HiddenItem>
             <HiddenItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
-                    <Tag >Pork</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Pork"}>
+                    <Tags >Pork</Tags>
                 </Link>
             </HiddenItem>
             <ListItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Pasta"}>
-                    <Tag >Pasta</Tag>
+                <Link href="/tags/[tags]" as={'/tags/' + "Pasta"}>
+                    <Tags >Pasta</Tags>
                 </Link>
             </ListItem>
             <ListItem>
-                <Link href="/tag/[tag]" as={'/tag/' + "Slow-Cooker"}>
-                    <Tag >Slow Cooker</Tag>
+                <Link href="/tags/" as={'/tags/'}>
+                    <Tags >More...</Tags>
                 </Link>
             </ListItem>
             <DropDown>
-                <Tag>Dropdown</Tag>
+                <Tags>Dropdown</Tags>
                 <div className="DropdownContent">
-                    <Link href="/tag/[tag]" as={'/tag/' + "Chicken"}>
-                        <Tag >Chicken</Tag>
+                    <Link href="/tags/[tags]" as={'/tags/' + "Chicken"}>
+                        <Tags >Chicken</Tags>
                     </Link>
-                    <Link href="/tag/[tag]" as={'/tag/' + "Beef"}>
-                        <Tag >Beef</Tag>
+                    <Link href="/tags/[tags]" as={'/tags/' + "Beef"}>
+                        <Tags >Beef</Tags>
                     </Link>
-                    <Link href="/tag/[tag]" as={'/tag/' + "Fish"}>
-                        <Tag >Fish</Tag>
+                    <Link href="/tags/[tags]" as={'/tags/' + "Fish"}>
+                        <Tags >Fish</Tags>
                     </Link>
-                    <Link href="/tag/[tag]" as={'/tag/' + "Pork"}>
-                        <Tag >Pork</Tag>
+                    <Link href="/tags/[tags]" as={'/tags/' + "Pork"}>
+                        <Tags >Pork</Tags>
                     </Link>
                 </div>
             </DropDown>

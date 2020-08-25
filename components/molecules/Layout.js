@@ -80,6 +80,7 @@ const Mobile = styled.div`
   position: fixed;
   width: 100vw;
   top:0;
+  z-index: 11;
     @media(min-width: 875px){
       display: none;
     }
