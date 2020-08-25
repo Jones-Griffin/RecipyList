@@ -88,7 +88,7 @@ const ListItemMob = styled(ListItem)`
       
       border-left: none;
       border-top:1px solid #bbb;
-      min-width: 75px;
+      min-width: 200px;
   
       &:first-child {
           border-top: none;
