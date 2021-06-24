@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CoverImg } from "../atoms/cardstyles";
 
 const StyledDiv = styled.div`
   height: 250px;
@@ -8,24 +9,20 @@ const StyledDiv = styled.div`
   border-radius: 25px;
   box-shadow: 3px 3px 5px grey;
   z-index: 0;
-  transition: all 0.1s ease-in-out;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 10px 10px 5px grey;
-    z-index: 0;
-  }
 `;
 
-const TitleDiv = styled.div`
+const TitleDiv = styled.input`
   font-size: 22px;
   font-weight: bold;
   text-align: center;
   padding: 8px 22px;
   padding-bottom: 5px;
+  width: 100%;
+  border: none;
   min-height: 72px;
 `;
 
@@ -40,19 +37,35 @@ const ImgDiv = styled.div`
   line-height: 150px;
 `;
 
-const DescDiv = styled.div`
+const DescDiv = styled.input`
   font-weight: normal;
   font-size: 12px;
   padding: 8px 22px;
+  width: 100%;
+  border: none;
   margin-bottom: 12px;
 `;
 
-export default function RecipyCard(props) {
+export const EditRecipycard = (props) => {
   return (
     <StyledDiv>
-      <ImgDiv>300x300</ImgDiv>
-      <TitleDiv>{props.title}</TitleDiv>
-      <DescDiv>{props.desc}</DescDiv>
+      <ImgDiv>
+        {props.imgUrl ? (
+          <CoverImg src={props.imgUrl} alt={props.imgUrl} />
+        ) : (
+          "270x130"
+        )}
+      </ImgDiv>
+      <TitleDiv
+        placeholder={"Title"}
+        value={props.title}
+        onBlur={(e) => props.onTitleChange(e.currentTarget.value)}
+      />
+      <DescDiv
+        placeholder={"Description"}
+        value={props.desc}
+        onBlur={(e) => props.onDescChange(e.currentTarget.value)}
+      />
     </StyledDiv>
   );
-}
+};
