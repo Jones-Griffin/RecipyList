@@ -92,7 +92,7 @@ const CreatePost = (props) => {
 
     var CardData = {
       description: description,
-      img: "None",
+      imageUrl: imgUrl,
       title: title,
     };
 
@@ -101,6 +101,7 @@ const CreatePost = (props) => {
 
     var RecipyData = {
       title: title,
+      description: description,
       Method: filteredMeth,
       Ingredients: filteredIng,
       user: user.uid,
@@ -115,7 +116,6 @@ const CreatePost = (props) => {
         updates["/TagInfo/" + tag.tagName + "/" + newRespityKey] = CardData;
       }
     });
-    updates["/RecipyNames/" + newRespityKey] = CardData;
     updates["/Recipies/" + newRespityKey] = RecipyData;
 
     fire.database().ref().update(updates);
