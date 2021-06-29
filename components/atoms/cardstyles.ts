@@ -5,3 +5,9 @@ export const CoverImg = styled.img`
   height: 100%;
   object-fit: cover;
 `;
+
+export const StyledTitle = styled.h1`
+@media (max-width: 875px) {
+  margin-top: 57px;
+}
+`;

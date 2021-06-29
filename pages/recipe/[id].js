@@ -1,24 +1,33 @@
 import fire from "../../config/fire-config";
+import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 
-import styled from "styled-components";
-
 import Layout from "../../components/molecules/Layout";
-
-const StyledTitle = styled.h1`
-  @media (max-width: 875px) {
-    margin-top: 57px;
-  }
-`;
+import { Header } from "../../components/atoms/Header";
 
 const Recipe = (props) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  fire.auth().onAuthStateChanged((user) => {
+    if (user && user.uid === props.user && props.user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  });
+
   return (
     <Layout>
       <Head>
         <title>{props.Title}</title>
       </Head>
-      <StyledTitle>{props.Title}</StyledTitle>
+      <Header
+        pageTitle={props.Title}
+        showHeaderButton={loggedIn}
+        headerButton={
+          <Link href={`/recipe/${props.recipeId}/editRecipie`}>Edit</Link>
+        }
+      />
       <h3>Ingredients</h3>
       <ul>
         {Object.entries(props.Ingredients).map((ingree) => (
@@ -51,6 +60,7 @@ export const getServerSideProps = async ({ query }) => {
       content["Title"] = result.title;
       content["Ingredients"] = result.Ingredients;
       content["Method"] = result.Method;
+      content["user"] = result.user;
     });
 
   return {
@@ -58,6 +68,8 @@ export const getServerSideProps = async ({ query }) => {
       Title: content.Title,
       Method: content.Method,
       Ingredients: content.Ingredients,
+      user: content.user || "",
+      recipeId: query.id,
     },
   };
 };
