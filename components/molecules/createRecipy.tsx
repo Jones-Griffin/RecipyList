@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import fire from "../../config/fire-config";
 import { useRouter } from "next/router";
@@ -39,11 +39,13 @@ const Footer = styled.div`
 `;
 
 export interface RecipieProps {
+  id: string;
   title?: string;
   description?: string;
-  ingredientsList?: string[];
-  method?: string[];
+  Ingredients?: string[];
+  Method?: string[];
   imgUrl?: string;
+  tags?: string[];
 }
 
 interface CreateRecipyProps {
@@ -52,23 +54,41 @@ interface CreateRecipyProps {
 }
 
 export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
+  console.log(recipie);
   const router = useRouter();
-  const [recipeClone, setRecipieClone] = useState<RecipieProps>(
-    recipie || {
-      title: "",
-      description: "",
-      ingredientsList: [],
-      method: [],
-      imgUrl: "",
+  const [recipeClone, setRecipieClone] = useState<RecipieProps>();
+
+  useEffect(() => {
+    if (recipie) {
+      setRecipieClone({
+        title: "",
+        description: "",
+        Ingredients: [],
+        Method: [],
+        imgUrl: "",
+        tags: [],
+        ...recipie,
+      });
+    } else {
+      setRecipieClone({
+        id: fire.database().ref().child("RecipyNames").push().key,
+        title: "",
+        description: "",
+        Ingredients: [],
+        Method: [],
+        imgUrl: "",
+        tags: [],
+      });
     }
-  );
+  }, []);
+
   const [notification, setNotification] = useState("");
 
   const user = fire.auth().currentUser;
 
   const updateRecipieClone = (partial: Partial<RecipieProps>) => {
     setRecipieClone((r) => {
-      return { ...r, partial };
+      return { ...r, ...partial };
     });
   };
 
@@ -82,22 +102,21 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
     event.preventDefault();
 
     var CardData = {
-      description: recipeClone.description,
-      imageUrl: recipeClone.imgUrl,
-      title: recipeClone.title,
+      description: recipeClone.description || "",
+      imageUrl: recipeClone.imgUrl || "",
+      title: recipeClone.title || "",
     };
-
-    var RecipyData = { ...recipeClone, user: user.uid };
-
-    var newRespityKey = fire.database().ref().child("RecipyNames").push().key;
 
     var updates = {};
     tagTracker.forEach((tag) => {
       if (tag.tagSet) {
-        updates["/TagInfo/" + tag.tagName + "/" + newRespityKey] = CardData;
+        recipeClone.tags.push(tag.tagName);
+        updates["/TagInfo/" + tag.tagName + "/" + recipeClone.id] = CardData;
       }
     });
-    updates["/Recipies/" + newRespityKey] = RecipyData;
+    var RecipyData = { ...recipeClone, user: user.uid };
+
+    updates["/Recipies/" + recipeClone.id] = RecipyData;
 
     fire.database().ref().update(updates);
 
@@ -117,8 +136,9 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
           <input
             name={tagTracker[i].tagName}
             type="checkbox"
-            onChange={() => {
-              tagTracker[i].tagSet = !tagTracker[i].tagSet;
+            defaultChecked={recipeClone?.tags.includes(tagTracker[i].tagName)}
+            onChange={(e) => {
+              tagTracker[i].tagSet = e.currentTarget.checked;
             }}
           />
           <p>{tagTracker[i].tagName} </p>
@@ -155,9 +175,9 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
               <br />
               <ol>
                 <IngredientsList
-                  ingredientsList={recipeClone.ingredientsList}
+                  ingredientsList={recipeClone?.Ingredients}
                   updateIngredientsList={(ingredients) =>
-                    updateRecipieClone({ ingredientsList: ingredients })
+                    updateRecipieClone({ Ingredients: ingredients })
                   }
                 />
               </ol>
@@ -167,9 +187,9 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
               <br />
               <ol>
                 <IngredientsList
-                  ingredientsList={recipeClone.method}
-                  updateIngredientsList={(ingredients) =>
-                    updateRecipieClone({ method: ingredients })
+                  ingredientsList={recipeClone?.Method}
+                  updateIngredientsList={(method) =>
+                    updateRecipieClone({ Method: method })
                   }
                 />
               </ol>
@@ -179,9 +199,9 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
             Card:
             <br />
             <EditRecipycard
-              imgUrl={recipeClone.imgUrl}
-              title={recipeClone.title}
-              description={recipeClone.description}
+              imgUrl={recipeClone?.imgUrl}
+              title={recipeClone?.title}
+              description={recipeClone?.description}
               updateTitle={(title) => updateRecipieClone({ title: title })}
               updateDesc={(desc) => updateRecipieClone({ description: desc })}
             />
@@ -200,7 +220,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
         <Link href="/">
           <a>Back</a>
         </Link>
-        <Submitbutton type="submit">Save</Submitbutton>
+        <Submitbutton onClick={handleSubmit}>Save</Submitbutton>
       </Footer>
     </div>
   );

@@ -27,7 +27,7 @@ export const IngredientsList: FC<Props> = ({
   ingredientsList,
   updateIngredientsList,
 }) => {
-  const ingredients = ingredientsList;
+  const ingredients = ingredientsList || [];
 
   if (ingredients.length === 0 || !!ingredients[ingredients.length - 1]) {
     ingredients.push("");

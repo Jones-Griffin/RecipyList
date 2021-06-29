@@ -35,7 +35,7 @@ const EditRecipie = (props) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
-  const content: RecipieProps = {};
+  let content: RecipieProps = { id: query.id };
   await fire
     .database()
     .ref(`Recipies/${query.id}`)
@@ -44,9 +44,9 @@ export const getServerSideProps = async ({ query }) => {
       return snapshot.val();
     })
     .then((result) => {
-      content.title = result.title;
-      content.ingredientsList = result.Ingredients;
-      content.method = result.Method;
+      delete result.user;
+      content = result;
+      content.id = query.id;
     });
 
   const tags = { Tags: "" };
