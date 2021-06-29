@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { CoverImg } from "../atoms/cardstyles";
 
@@ -46,25 +47,35 @@ const DescDiv = styled.input`
   margin-bottom: 12px;
 `;
 
-export const EditRecipycard = (props) => {
+interface EditRecipycardProps {
+  imgUrl: string;
+  title: string;
+  updateTitle: (title: string) => void;
+  description: string;
+  updateDesc: (desc: string) => void;
+}
+
+export const EditRecipycard: FC<EditRecipycardProps> = ({
+  imgUrl,
+  title,
+  description,
+  updateTitle,
+  updateDesc,
+}) => {
   return (
     <StyledDiv>
       <ImgDiv>
-        {props.imgUrl ? (
-          <CoverImg src={props.imgUrl} alt={props.imgUrl} />
-        ) : (
-          "270x130"
-        )}
+        {imgUrl ? <CoverImg src={imgUrl} alt={imgUrl} /> : "270x130"}
       </ImgDiv>
       <TitleDiv
         placeholder={"Title"}
-        value={props.title}
-        onBlur={(e) => props.onTitleChange(e.currentTarget.value)}
+        value={title}
+        onBlur={(e) => updateTitle(e.currentTarget.value)}
       />
       <DescDiv
         placeholder={"Description"}
-        value={props.desc}
-        onBlur={(e) => props.onDescChange(e.currentTarget.value)}
+        value={description}
+        onBlur={(e) => updateDesc(e.currentTarget.value)}
       />
     </StyledDiv>
   );

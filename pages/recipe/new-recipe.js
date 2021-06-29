@@ -3,12 +3,12 @@ import Link from "next/link";
 import styled from "styled-components";
 
 import Layout from "../../components/molecules/Layout";
-import CreatePost from "../../components/molecules/createRecipy";
-import { useState, useEffect } from "react";
+import { CreateRecipy } from "../../components/molecules/createRecipy";
+import { useState } from "react";
 import fire from "../../config/fire-config";
 import Head from "next/head";
 
-const MainDiv = styled.div`
+export const MainDiv = styled.div`
   @media (max-width: 875px) {
     margin-top: 57px;
   }
@@ -32,11 +32,8 @@ const NewRecipy = (props) => {
         {!loggedIn ? (
           <p>you must be loggin in to perform this function</p>
         ) : (
-          <CreatePost Tags={props.Tags} />
+          <CreateRecipy tags={props.Tags} />
         )}
-        <Link href="/">
-          <a>Back</a>
-        </Link>
       </MainDiv>
     </Layout>
   );

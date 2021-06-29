@@ -18,6 +18,10 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
+  "paths": {
+    "@config/*": ["config/*"],
+    "@components/*": ["components/*"],
+  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
