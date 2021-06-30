@@ -54,7 +54,6 @@ interface CreateRecipyProps {
 }
 
 export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
-  console.log(recipie);
   const router = useRouter();
   const [recipeClone, setRecipieClone] = useState<RecipieProps>();
 

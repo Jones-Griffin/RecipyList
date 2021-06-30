@@ -11,7 +11,7 @@ import { MainDiv } from "../new-recipe";
 const EditRecipie = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   fire.auth().onAuthStateChanged((user) => {
-    if (user) {
+    if (user && user.uid === props.user && props.user) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
