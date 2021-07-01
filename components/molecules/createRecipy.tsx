@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import fire from "../../config/fire-config";
 import { useRouter } from "next/router";
-import { EditRecipycard } from "./EditRecipyCard";
+import { EditRecipycard } from "./EditReipyComponents/EditRecipyCard";
 import styled from "styled-components";
 import firebase from "firebase";
 import { IngredientsList } from "./EditReipyComponents/IngredientsList";

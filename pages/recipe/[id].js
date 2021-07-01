@@ -30,15 +30,21 @@ const Recipe = (props) => {
       />
       <h3>Ingredients</h3>
       <ul>
-        {Object.entries(props.Ingredients).map((ingree) => (
-          <li key={ingree[0]}>{ingree[1]}</li>
-        ))}
+        {Object.entries(props.Ingredients).map((ingree) => {
+          if (!ingree[1]) {
+            return;
+          }
+          return <li key={ingree[0]}>{ingree[1]}</li>;
+        })}
       </ul>
       <h3>Method</h3>
       <ol>
-        {Object.entries(props.Method).map((Method) => (
-          <li key={Method[0]}>{Method[1]}</li>
-        ))}
+        {Object.entries(props.Method).map((step) => {
+          if (!step[1]) {
+            return;
+          }
+          return <li key={step[0]}>{step[1]}</li>;
+        })}
       </ol>
       <Link href="/">
         <a>Back</a>

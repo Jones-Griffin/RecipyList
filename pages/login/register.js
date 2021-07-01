@@ -5,12 +5,8 @@ import { useRouter } from "next/router";
 import Layout from "../../components/molecules/Layout";
 import styled from "styled-components";
 import Head from "next/head";
-
-const Title = styled.h1`
-  @media (max-width: 875px) {
-    margin-top: 57px;
-  }
-`;
+import { Header } from "../../components/atoms/Header";
+import Link from "next/link";
 
 const Register = () => {
   const router = useRouter();
@@ -37,7 +33,7 @@ const Register = () => {
       .auth()
       .createUserWithEmailAndPassword(userName, password)
       .catch((err) => {
-        console.log(err.code, err.message);
+        console.error(err.code, err.message);
       });
     router.push("/");
   };
@@ -46,26 +42,29 @@ const Register = () => {
       <Head>
         <title>Register</title>
       </Head>
-      <Title>Create new user</Title>
-
+      <Header
+        pageTitle={"Create new user"}
+        showHeaderButton={true}
+        headerButton={<Link href={`/`}>Back</Link>}
+      />
       {notification}
 
       <form onSubmit={handleLogin}>
-        Email:{" "}
+        Email:&nbsp;
         <input
           type="text"
           value={userName}
           onChange={({ target }) => setUsername(target.value)}
         />
         <br />
-        Password:{" "}
+        Password:&nbsp;
         <input
           type="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
         <br />
-        Password conf:{" "}
+        Confirm password:&nbsp;
         <input
           type="password"
           value={passConf}

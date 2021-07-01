@@ -1,17 +1,11 @@
 import Head from "next/head";
 import fire from "../config/fire-config";
 import Link from "next/link";
-import styled from "styled-components";
 
 import Layout from "../components/molecules/Layout";
-import RecipyCard from "../components/molecules/RecipyCard";
+import { RecipyCard } from "../components/molecules/RecipyCard";
 import RecipyCardDiv from "../components/molecules/RecipyCardStyling";
-
-const Title = styled.h1`
-  @media (max-width: 875px) {
-    margin-top: 57px;
-  }
-`;
+import { Header } from "../components/atoms/Header";
 
 const Home = (props) => {
   return (
@@ -20,7 +14,7 @@ const Home = (props) => {
         <title>Recipe App</title>
       </Head>
       <Layout>
-        <Title>Recipies</Title>
+        <Header pageTitle={"Recipies"} />
         <RecipyCardDiv>
           {Object.entries(props.Recipe).map((Recipy) => (
             <Link
@@ -31,7 +25,8 @@ const Home = (props) => {
               <a>
                 <RecipyCard
                   title={Recipy[1].title}
-                  desc={Recipy[1].description}
+                  description={Recipy[1].description}
+                  imgUrl={Recipy[1].imgUrl}
                 />
               </a>
             </Link>

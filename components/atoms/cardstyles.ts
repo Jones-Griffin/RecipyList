@@ -8,6 +8,6 @@ export const CoverImg = styled.img`
 
 export const StyledTitle = styled.h1`
 @media (max-width: 875px) {
-  margin-top: 57px;
+  margin-top: 78px;
 }
 `;

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { CoverImg } from "../atoms/cardstyles";
+import { CoverImg } from "../../atoms/cardstyles";
 
 const StyledDiv = styled.div`
   height: 250px;

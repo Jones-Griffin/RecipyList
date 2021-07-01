@@ -1,4 +1,6 @@
+import React, { FC } from "react";
 import styled from "styled-components";
+import { CoverImg } from "../atoms/cardstyles";
 
 const StyledDiv = styled.div`
   height: 250px;
@@ -46,13 +48,24 @@ const DescDiv = styled.div`
   padding: 8px 22px;
   margin-bottom: 12px;
 `;
+interface RecipyCardProps {
+  title: string;
+  description?: string;
+  imgUrl?: string;
+}
 
-export default function RecipyCard(props) {
+export const RecipyCard: FC<RecipyCardProps> = ({
+  title,
+  description,
+  imgUrl,
+}) => {
   return (
     <StyledDiv>
-      <ImgDiv>300x300</ImgDiv>
-      <TitleDiv>{props.title}</TitleDiv>
-      <DescDiv>{props.desc}</DescDiv>
+      <ImgDiv>
+        {imgUrl ? <CoverImg src={imgUrl} alt={imgUrl} /> : "270x130"}
+      </ImgDiv>
+      <TitleDiv>{title}</TitleDiv>
+      <DescDiv>{description}</DescDiv>
     </StyledDiv>
   );
-}
+};
