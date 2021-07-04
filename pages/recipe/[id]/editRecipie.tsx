@@ -11,7 +11,8 @@ import { MainDiv } from "../new-recipe";
 const EditRecipie = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   fire.auth().onAuthStateChanged((user) => {
-    if (user && user.uid === props.user && props.user) {
+    console.log(props);
+    if (user && props.user && user.uid === props.user) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
@@ -36,6 +37,7 @@ const EditRecipie = (props) => {
 
 export const getServerSideProps = async ({ query }) => {
   let content: RecipieProps = { id: query.id };
+  const otherContent = { Tags: "", User: "" };
   await fire
     .database()
     .ref(`Recipies/${query.id}`)
@@ -44,12 +46,13 @@ export const getServerSideProps = async ({ query }) => {
       return snapshot.val();
     })
     .then((result) => {
-      delete result.user;
-      content = result;
+      const recipe = { ...result };
+      delete recipe.user;
+      otherContent.User = result.user;
+      content = recipe;
       content.id = query.id;
     });
 
-  const tags = { Tags: "" };
   await fire
     .database()
     .ref(`Tags`)
@@ -58,13 +61,14 @@ export const getServerSideProps = async ({ query }) => {
       return snapshot.val();
     })
     .then((result) => {
-      tags["Tags"] = result;
+      otherContent.Tags = result;
     });
 
   return {
     props: {
       recipie: content,
-      Tags: tags.Tags,
+      user: otherContent.User,
+      Tags: otherContent.Tags,
     },
   };
 };

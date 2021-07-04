@@ -102,7 +102,7 @@ export const NavMobile: FC = () => {
         </Link>
       </ListItemMob>
       {navItems.map((item) => (
-        <ListItemMob>
+        <ListItemMob key={item}>
           <Link key={item} href="/tags/[tags]" as={"/tags/" + item}>
             <Tags>{item}</Tags>
           </Link>
@@ -130,6 +130,11 @@ export const NavButtons: FC = () => {
           <Tags>Dinners</Tags>
         </Link>
       </ListItem>
+      <ListItem>
+        <Link href="/tags/[tags]" as={"/tags/" + "Pasta"}>
+          <Tags>Pasta</Tags>
+        </Link>
+      </ListItem>
       {navItems.map((item) => (
         <HiddenItem key={item}>
           <Link href="/tags/[tags]" as={"/tags/" + item}>
@@ -138,23 +143,21 @@ export const NavButtons: FC = () => {
         </HiddenItem>
       ))}
       <ListItem>
-        <Link href="/tags/[tags]" as={"/tags/" + "Pasta"}>
-          <Tags>Pasta</Tags>
-        </Link>
-      </ListItem>
-      <ListItem>
         <Link href="/tags/" as={"/tags/"}>
           <Tags>More...</Tags>
         </Link>
       </ListItem>
       <DropDown>
-        <Tags>Dropdown</Tags>
+        <Tags>More...</Tags>
         <div className="DropdownContent">
           {navItems.map((item) => (
             <Link key={item} href="/tags/[tags]" as={"/tags/" + item}>
               <Tags>{item}</Tags>
             </Link>
           ))}
+          <Link href="/tags/" as={"/tags/"}>
+            <Tags>All tags</Tags>
+          </Link>
         </div>
       </DropDown>
     </List>

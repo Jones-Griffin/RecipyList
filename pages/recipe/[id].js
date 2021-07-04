@@ -9,7 +9,7 @@ import { Header } from "../../components/atoms/Header";
 const Recipe = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   fire.auth().onAuthStateChanged((user) => {
-    if (user && user.uid === props.user && props.user) {
+    if (user && props.user && user.uid === props.user) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
