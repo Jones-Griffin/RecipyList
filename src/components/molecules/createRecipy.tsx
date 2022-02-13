@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import fire from "../../config/fire-config";
 import { useRouter } from "next/router";
 import { EditRecipycard } from "./EditReipyComponents/EditRecipyCard";
 import styled from "styled-components";
 import firebase from "firebase";
 import { IngredientsList } from "./EditReipyComponents/IngredientsList";
-import { Submitbutton } from "../atoms/SubmitButton";
+import { SubmitButton } from "../atoms/SubmitButton";
+import fire from "../../../config/fire-config";
 
 const CheckDiv = styled.div`
   display: flex;
@@ -219,7 +219,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
         <Link href="/">
           <a>Back</a>
         </Link>
-        <Submitbutton onClick={handleSubmit}>Save</Submitbutton>
+        <SubmitButton onClick={handleSubmit}>Save</SubmitButton>
       </Footer>
     </div>
   );

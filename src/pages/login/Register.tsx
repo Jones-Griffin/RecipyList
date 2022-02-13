@@ -1,14 +1,10 @@
-// pages/login/register.js
-import { useState } from "react";
-import fire from "../../config/fire-config";
-import { useRouter } from "next/router";
-import Layout from "../../components/molecules/Layout";
-import styled from "styled-components";
-import Head from "next/head";
-import { Header } from "../../components/atoms/Header";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import fire from "../../../config/fire-config";
+import { Header } from "../../components/atoms/Header";
 
-const Register = () => {
+export const Register = () => {
   const router = useRouter();
 
   const [userName, setUsername] = useState("");
@@ -38,17 +34,13 @@ const Register = () => {
     router.push("/");
   };
   return (
-    <Layout>
-      <Head>
-        <title>Register</title>
-      </Head>
+    <>
       <Header
         pageTitle={"Create new user"}
         showHeaderButton={true}
         headerButton={<Link href={`/`}>Back</Link>}
       />
       {notification}
-
       <form onSubmit={handleLogin}>
         Email:&nbsp;
         <input
@@ -73,7 +65,6 @@ const Register = () => {
         <br />
         <button type="submit">Login</button>
       </form>
-    </Layout>
+    </>
   );
 };
-export default Register;

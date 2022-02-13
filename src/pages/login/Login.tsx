@@ -1,13 +1,10 @@
-import { useState } from "react";
-import fire from "../../config/fire-config";
-import { useRouter } from "next/router";
-import Layout from "../../components/molecules/Layout";
-import styled from "styled-components";
-import Head from "next/head";
-import { Header } from "../../components/atoms/Header";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import fire from "../../../config/fire-config";
+import { Header } from "../../components/atoms/Header";
 
-const Login = () => {
+export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [notify, setNotification] = useState("");
@@ -29,10 +26,7 @@ const Login = () => {
     router.push("/");
   };
   return (
-    <Layout>
-      <Head>
-        <title>Login</title>
-      </Head>
+    <>
       <Header
         pageTitle={"Login"}
         showHeaderButton={true}
@@ -56,7 +50,6 @@ const Login = () => {
         <br />
         <button type="submit">Login</button>
       </form>
-    </Layout>
+    </>
   );
 };
-export default Login;

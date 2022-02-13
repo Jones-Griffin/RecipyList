@@ -2,21 +2,25 @@ import Head from "next/head";
 import fire from "../config/fire-config";
 import Link from "next/link";
 
-import Layout from "../components/molecules/Layout";
-import { RecipyCard } from "../components/molecules/RecipyCard";
-import RecipyCardDiv from "../components/molecules/RecipyCardStyling";
-import { Header } from "../components/atoms/Header";
+import Layout from "../src/components/molecules/Layout";
+import { RecipyCard } from "../src/components/molecules/RecipyCard";
+import RecipyCardDiv from "../src/components/molecules/RecipyCardStyling";
+import { Header } from "../src/components/atoms/Header";
 
-const Home = (props) => {
+interface Props {
+  Recipes: any[];
+}
+
+const Home = (props: Props) => {
   return (
     <div>
       <Head>
         <title>Recipe App</title>
       </Head>
       <Layout>
-        <Header pageTitle={"Recipies"} />
+        <Header pageTitle={"Recipes"} />
         <RecipyCardDiv>
-          {Object.entries(props.Recipe).map((Recipy) => (
+          {Object.entries(props.Recipes).map((Recipy) => (
             <Link
               key={Recipy[0]}
               href="/recipe/[id]"
@@ -38,8 +42,7 @@ const Home = (props) => {
 };
 
 export const getServerSideProps = async () => {
-  const content = {};
-  await fire
+  const recipes = await fire
     .database()
     .ref(`Recipies`)
     .limitToLast(15)
@@ -48,12 +51,12 @@ export const getServerSideProps = async () => {
       return snapshot.val();
     })
     .then((result) => {
-      content["RecipyCards"] = result;
+      return result;
     });
 
   return {
     props: {
-      Recipe: content.RecipyCards,
+      Recipes: recipes,
     },
   };
 };

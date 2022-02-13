@@ -59,16 +59,15 @@ const Burger: FC<BurgerProps> = ({ open, setOpen }) => {
 };
 
 interface HamburgerMenuProps {
-  loggin: boolean;
   loggout: () => void;
 }
 
-export const HamburgerMenu: FC<HamburgerMenuProps> = ({ loggin, loggout }) => {
+export const HamburgerMenu: FC<HamburgerMenuProps> = ({ loggout }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div>
-      <Menu open={open} loggedin={loggin} logout={loggout} />
+      <Menu open={open} logout={loggout} />
       <Burger open={open} setOpen={setOpen} />
     </div>
   );

@@ -1,20 +1,14 @@
-import fire from "../../config/fire-config";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { useAuthSelector } from "../../../src/context/AuthUserContext";
+import Layout from "../../../src/components/molecules/Layout";
+import { Header } from "../../../src/components/atoms/Header";
+import fire from "../../../config/fire-config";
 
-import Layout from "../../components/molecules/Layout";
-import { Header } from "../../components/atoms/Header";
 
 const Recipe = (props) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  fire.auth().onAuthStateChanged((user) => {
-    if (user && props.user && user.uid === props.user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
+  const authUser = useAuthSelector((s) => s.authUser);
 
   return (
     <Layout>
@@ -23,18 +17,18 @@ const Recipe = (props) => {
       </Head>
       <Header
         pageTitle={props.Title}
-        showHeaderButton={loggedIn}
+        showHeaderButton={!!authUser}
         headerButton={
           <Link href={`/recipe/${props.recipeId}/editRecipie`}>Edit</Link>
         }
       />
       <h3>Ingredients</h3>
       <ul>
-        {Object.entries(props.Ingredients).map((ingree) => {
-          if (!ingree[1]) {
+        {Object.entries(props.Ingredients).map((ingredient) => {
+          if (!ingredient[1]) {
             return;
           }
-          return <li key={ingree[0]}>{ingree[1]}</li>;
+          return <li key={ingredient[0]}>{ingredient[1]}</li>;
         })}
       </ul>
       <h3>Method</h3>
@@ -54,8 +48,7 @@ const Recipe = (props) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
-  const content = {};
-  await fire
+  const content = await fire
     .database()
     .ref(`Recipies/${query.id}`)
     .once("value")
@@ -63,10 +56,12 @@ export const getServerSideProps = async ({ query }) => {
       return snapshot.val();
     })
     .then((result) => {
-      content["Title"] = result.title;
-      content["Ingredients"] = result.Ingredients;
-      content["Method"] = result.Method;
-      content["user"] = result.user;
+      return {
+        Title: result.Title || "",
+        Method: result.Method || "",
+        Ingredients: result.Ingredients || "",
+        user: result.user || "",
+      };
     });
 
   return {
@@ -74,7 +69,7 @@ export const getServerSideProps = async ({ query }) => {
       Title: content.Title,
       Method: content.Method,
       Ingredients: content.Ingredients,
-      user: content.user || "",
+      user: content.user,
       recipeId: query.id,
     },
   };

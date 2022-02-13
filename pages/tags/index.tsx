@@ -2,10 +2,10 @@ import Head from "next/head";
 import fire from "../../config/fire-config";
 import Link from "next/link";
 
-import Layout from "../../components/molecules/Layout";
-import { RecipyCard } from "../../components/molecules/RecipyCard";
-import RecipyCardDiv from "../../components/molecules/RecipyCardStyling";
-import { Header } from "../../components/atoms/Header";
+import Layout from "../../src/components/molecules/Layout";
+import { RecipyCard } from "../../src/components/molecules/RecipyCard";
+import RecipyCardDiv from "../../src/components/molecules/RecipyCardStyling";
+import { Header } from "../../src/components/atoms/Header";
 
 const Tags = (props) => {
   return (
@@ -16,10 +16,10 @@ const Tags = (props) => {
       <Layout>
         <Header pageTitle={"Tags"} />
         <RecipyCardDiv>
-          {Object.entries(props.Recipe).map((Recipy) => (
-            <Link key={Recipy[0]} href="/tags/[tag]" as={"/tags/" + Recipy[0]}>
+          {Object.entries(props.tags || []).map((tag) => (
+            <Link key={tag[0]} href="/tags/[tag]" as={"/tags/" + tag[0]}>
               <a>
-                <RecipyCard title={Recipy[0]} description={""} />
+                <RecipyCard title={tag[0]} description={""} />
               </a>
             </Link>
           ))}
@@ -30,8 +30,7 @@ const Tags = (props) => {
 };
 
 export const getServerSideProps = async () => {
-  const content = {};
-  await fire
+  const tags = await fire
     .database()
     .ref(`Tags`)
     .once("value")
@@ -39,12 +38,12 @@ export const getServerSideProps = async () => {
       return snapshot.val();
     })
     .then((result) => {
-      content["RecipyCards"] = result;
+      return result;
     });
 
   return {
     props: {
-      Recipe: content.RecipyCards,
+      tags: tags,
     },
   };
 };

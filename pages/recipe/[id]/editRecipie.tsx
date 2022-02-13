@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import fire from "../../../config/fire-config";
+import React, { useEffect } from "react";
 import Head from "next/head";
-import Layout from "../../../components/molecules/Layout";
-import {
-  CreateRecipy,
-  RecipieProps,
-} from "../../../components/molecules/createRecipy";
+import Layout from "../../../src/components/molecules/Layout";
 import { MainDiv } from "../new-recipe";
+import fire from "../../../config/fire-config";
+import { CreateRecipy, RecipieProps } from "../../../src/components/molecules/createRecipy";
+import { useAuthSelector } from "../../../src/context/AuthUserContext";
+import { useRouter } from "next/router";
 
 const EditRecipie = (props) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  fire.auth().onAuthStateChanged((user) => {
-    if (user && props.user && user.uid === props.user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
+  const authUser = useAuthSelector((s) => s.authUser);
+  const loading = useAuthSelector((s) => s.loading);
+  const router = useRouter();
+
+  // Listen for changes on loading and authUser, redirect if needed
+  useEffect(() => {
+    if (!loading && !authUser) router.push("/");
+  }, [authUser, loading]);
 
   return (
     <Layout>
@@ -24,8 +23,8 @@ const EditRecipie = (props) => {
         <title>{props.recipie.title}</title>
       </Head>
       <MainDiv>
-        {!loggedIn ? (
-          <p>you must be loggin in to perform this function</p>
+        {!authUser ? (
+          <p>you must be logged in in to perform this function</p>
         ) : (
           <CreateRecipy tags={props.Tags} recipie={props.recipie} />
         )}

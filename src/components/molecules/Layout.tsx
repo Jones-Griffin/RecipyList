@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-import fire from "../../config/fire-config";
+import React from "react";
+import fire from "../../../config/fire-config";
 import Link from "next/link";
 import { HamburgerMenu } from "../atoms/hamburgr";
 import { PageContainer } from "../atoms/container";
 
-import {NavButtons} from "../atoms/tagbuttons";
+import { NavButtons } from "../atoms/tagbuttons";
+import { useAuthSelector } from "../../context/AuthUserContext";
 
 const Header = styled.div`
   width: 100%;
@@ -89,18 +90,10 @@ const Desktop = styled.div`
 `;
 
 export default function Layout(props) {
-  const [loggedIn, setLoggedIn] = useState(false);
-  fire.auth().onAuthStateChanged((user) => {
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
-
   const handleLogout = () => {
     fire.auth().signOut();
   };
+  const authUser = useAuthSelector((s) => s.authUser);
 
   return (
     <div>
@@ -109,7 +102,7 @@ export default function Layout(props) {
           <Link href="/">
             <Title>How To Cook</Title>
           </Link>
-          <HamburgerMenu loggin={loggedIn} loggout={handleLogout} />
+          <HamburgerMenu loggout={handleLogout} />
         </Header>
       </Mobile>
       <Desktop>
@@ -118,7 +111,7 @@ export default function Layout(props) {
             <Title>How To Cook</Title>
           </Link>
           <NavButtons />
-          {!loggedIn ? (
+          {!authUser && (
             <div>
               <Link href="/login/register">
                 <TagLeft>Register</TagLeft>
@@ -127,7 +120,8 @@ export default function Layout(props) {
                 <Tag> Login</Tag>
               </Link>
             </div>
-          ) : (
+          )}
+          {!!authUser && (
             <div>
               <Link href="/recipe/new-recipe">
                 <TagLeft>Add New Recipe</TagLeft>
