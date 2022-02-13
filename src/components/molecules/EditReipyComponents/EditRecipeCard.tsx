@@ -47,7 +47,7 @@ const DescDiv = styled.input`
   margin-bottom: 12px;
 `;
 
-interface EditRecipycardProps {
+interface EditRecipeCardProps {
   imgUrl: string;
   title: string;
   updateTitle: (title: string) => void;
@@ -55,7 +55,7 @@ interface EditRecipycardProps {
   updateDesc: (desc: string) => void;
 }
 
-export const EditRecipycard: FC<EditRecipycardProps> = ({
+export const EditRecipeCard: FC<EditRecipeCardProps> = ({
   imgUrl,
   title,
   description,

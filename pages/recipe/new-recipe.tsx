@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 import Layout from "../../src/components/molecules/Layout";
-import { CreateRecipy } from "../../src/components/molecules/createRecipy";
+import { CreateRecipe } from "../../src/components/molecules/createRecipe";
 import { useEffect } from "react";
 import fire from "../../config/fire-config";
 import Head from "next/head";
@@ -33,7 +33,7 @@ const NewRecipe = (props) => {
         {!authUser ? (
           <p>you must be logged in in to perform this function</p>
         ) : (
-          <CreateRecipy tags={props.Tags} />
+          <CreateRecipe tags={props.Tags} />
         )}
       </MainDiv>
     </Layout>

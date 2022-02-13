@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { EditRecipycard } from "./EditReipyComponents/EditRecipyCard";
+import { EditRecipeCard } from "./EditReipyComponents/EditRecipeCard";
 import styled from "styled-components";
 import firebase from "firebase";
 import { IngredientsList } from "./EditReipyComponents/IngredientsList";
@@ -20,7 +20,7 @@ const TagDiv = styled.div`
   width: 100%;
 `;
 
-const EditRecipyDiv = styled.div`
+const EditRecipeDiv = styled.div`
   display: flex;
 `;
 
@@ -38,7 +38,7 @@ const Footer = styled.div`
   margin: 0 45px 18px 25px;
 `;
 
-export interface RecipieProps {
+export interface RecipeProps {
   id: string;
   title?: string;
   description?: string;
@@ -48,28 +48,28 @@ export interface RecipieProps {
   tags?: string[];
 }
 
-interface CreateRecipyProps {
+interface CreateRecipeProps {
   tags: any;
-  recipie?: RecipieProps;
+  recipe?: RecipeProps;
 }
 
-export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
+export const CreateRecipe: FC<CreateRecipeProps> = ({ tags, recipe }) => {
   const router = useRouter();
-  const [recipeClone, setRecipieClone] = useState<RecipieProps>();
+  const [recipeClone, setRecipeClone] = useState<RecipeProps>();
 
   useEffect(() => {
-    if (recipie) {
-      setRecipieClone({
+    if (recipe) {
+      setRecipeClone({
         title: "",
         description: "",
         Ingredients: [],
         Method: [],
         imgUrl: "",
         tags: [],
-        ...recipie,
+        ...recipe,
       });
     } else {
-      setRecipieClone({
+      setRecipeClone({
         id: fire.database().ref().child("RecipyNames").push().key,
         title: "",
         description: "",
@@ -85,8 +85,8 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
 
   const user = fire.auth().currentUser;
 
-  const updateRecipieClone = (partial: Partial<RecipieProps>) => {
-    setRecipieClone((r) => {
+  const updateRecipeClone = (partial: Partial<RecipeProps>) => {
+    setRecipeClone((r) => {
       return { ...r, ...partial };
     });
   };
@@ -157,7 +157,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
 
     task.then((snapshot) => {
       snapshot.ref.getDownloadURL().then((downloadURL) => {
-        updateRecipieClone({ imgUrl: downloadURL });
+        updateRecipeClone({ imgUrl: downloadURL });
       });
     });
   };
@@ -167,7 +167,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
       <h2>Add Recipe</h2>
       {notification}
       <form onSubmit={handleSubmit}>
-        <EditRecipyDiv>
+        <EditRecipeDiv>
           <IngredientsDiv>
             <div>
               Ingredients:
@@ -176,7 +176,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
                 <IngredientsList
                   ingredientsList={recipeClone?.Ingredients}
                   updateIngredientsList={(ingredients) =>
-                    updateRecipieClone({ Ingredients: ingredients })
+                    updateRecipeClone({ Ingredients: ingredients })
                   }
                 />
               </ol>
@@ -188,7 +188,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
                 <IngredientsList
                   ingredientsList={recipeClone?.Method}
                   updateIngredientsList={(method) =>
-                    updateRecipieClone({ Method: method })
+                    updateRecipeClone({ Method: method })
                   }
                 />
               </ol>
@@ -197,12 +197,12 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
           <TestDiv>
             Card:
             <br />
-            <EditRecipycard
+            <EditRecipeCard
               imgUrl={recipeClone?.imgUrl}
               title={recipeClone?.title}
               description={recipeClone?.description}
-              updateTitle={(title) => updateRecipieClone({ title: title })}
-              updateDesc={(desc) => updateRecipieClone({ description: desc })}
+              updateTitle={(title) => updateRecipeClone({ title: title })}
+              updateDesc={(desc) => updateRecipeClone({ description: desc })}
             />
             <br />
             <input
@@ -213,7 +213,7 @@ export const CreateRecipy: FC<CreateRecipyProps> = ({ tags, recipie }) => {
             />
             <TagDiv>{renderTag()}</TagDiv>
           </TestDiv>
-        </EditRecipyDiv>
+        </EditRecipeDiv>
       </form>
       <Footer>
         <Link href="/">

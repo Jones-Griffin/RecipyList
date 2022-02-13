@@ -3,11 +3,14 @@ import Head from "next/head";
 import Layout from "../../../src/components/molecules/Layout";
 import { MainDiv } from "../new-recipe";
 import fire from "../../../config/fire-config";
-import { CreateRecipy, RecipieProps } from "../../../src/components/molecules/createRecipy";
+import {
+  CreateRecipe,
+  RecipeProps,
+} from "../../../src/components/molecules/createRecipe";
 import { useAuthSelector } from "../../../src/context/AuthUserContext";
 import { useRouter } from "next/router";
 
-const EditRecipie = (props) => {
+const EditRecipe = (props) => {
   const authUser = useAuthSelector((s) => s.authUser);
   const loading = useAuthSelector((s) => s.loading);
   const router = useRouter();
@@ -20,13 +23,13 @@ const EditRecipie = (props) => {
   return (
     <Layout>
       <Head>
-        <title>{props.recipie.title}</title>
+        <title>{props.recipe.title}</title>
       </Head>
       <MainDiv>
         {!authUser ? (
           <p>you must be logged in in to perform this function</p>
         ) : (
-          <CreateRecipy tags={props.Tags} recipie={props.recipie} />
+          <CreateRecipe tags={props.Tags} recipe={props.recipe} />
         )}
       </MainDiv>
     </Layout>
@@ -34,11 +37,11 @@ const EditRecipie = (props) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
-  let content: RecipieProps = { id: query.id };
+  let content: RecipeProps = { id: query.id };
   const otherContent = { Tags: "", User: "" };
   await fire
     .database()
-    .ref(`Recipies/${query.id}`)
+    .ref(`recipes/${query.id}`)
     .once("value")
     .then(function (snapshot) {
       return snapshot.val();
@@ -64,11 +67,11 @@ export const getServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      recipie: content,
+      recipe: content,
       user: otherContent.User,
       Tags: otherContent.Tags,
     },
   };
 };
 
-export default EditRecipie;
+export default EditRecipe;
